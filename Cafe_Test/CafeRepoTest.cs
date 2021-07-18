@@ -33,7 +33,7 @@ namespace Cafe_Test
         {
             int count = _testRepo._menu.Count;
             var repo = _testRepo.GetMenu();
-            Assert.IsTrue(count == repo.Count);
+            Assert.AreEqual(count, repo.Count);
         }
 
         [TestMethod]

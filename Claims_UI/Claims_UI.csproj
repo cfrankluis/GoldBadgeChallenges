@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F4855F7C-CF9C-443B-A81D-62754ADAB62E}</ProjectGuid>
+    <ProjectGuid>{960E6F25-25DC-4F7C-8BAE-9C950C6A6F86}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Cafe_Console</RootNamespace>
-    <AssemblyName>Cafe_Console</AssemblyName>
+    <RootNamespace>Claims_UI</RootNamespace>
+    <AssemblyName>Claims_UI</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -51,9 +51,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Cafe_Repository\Cafe_Repository.csproj">
-      <Project>{4c780e80-54c5-4a78-9cbd-efd0dd46c0e1}</Project>
-      <Name>Cafe_Repository</Name>
+    <ProjectReference Include="..\Claims_Repository\Claims_Repository.csproj">
+      <Project>{1ccb188b-4c30-4a3a-8684-8396a2987cfe}</Project>
+      <Name>Claims_Repository</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
