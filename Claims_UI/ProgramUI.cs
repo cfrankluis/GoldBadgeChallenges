@@ -10,6 +10,7 @@ namespace Claims_UI
     class ProgramUI
     {
         private readonly IClaimRepository _claimRepo;
+        private const char _currency = '$';
 
         public ProgramUI(IClaimRepository repo)
         {
@@ -24,7 +25,8 @@ namespace Claims_UI
         private void GetUserResponse()
         {
             Console.Clear();
-            Console.WriteLine("Please select from the following options:\n" +
+            Console.WriteLine("Welcome to the Komodo Insurance Claims Manager!\n" +
+                "Please select from the following options:\n" +
                 "1. See all claims\n" +
                 "2. Take care of next claim\n" +
                 "3. Enter a new claim");
@@ -60,13 +62,13 @@ namespace Claims_UI
             int id = int.Parse(Console.ReadLine());
 
             Console.Write("Enter the claim type: ");
-            ClaimType claimType = GetClaimType(Console.ReadLine());
+            ClaimType claimType = GetClaimType();
 
             Console.Write("Enter a claim description: ");
             string description = Console.ReadLine();
 
-            Console.Write("Amount of Damage: ");
-            decimal amount = decimal.Parse(Console.ReadLine().Remove(0,1));
+            Console.Write($"Amount of Damage({_currency}): ");
+            decimal amount = decimal.Parse(Console.ReadLine());
 
             Console.Write("Date of Accident: ");
             DateTime dateOfAccident = DateTime.Parse(Console.ReadLine());
@@ -75,11 +77,15 @@ namespace Claims_UI
             DateTime dateOfClaim = DateTime.Parse(Console.ReadLine());
 
             Console.Write("Is the claim valid?(y/n) ");
-            bool isValid = GetBool(Console.ReadKey().KeyChar);
+            bool isValid = GetBool();
 
             Claim claimToAdd = new Claim(id,claimType,description,amount,dateOfAccident,dateOfClaim,isValid);
 
             bool succeeded = _claimRepo.AddClaim(claimToAdd);
+            if (succeeded)
+                Console.WriteLine("Claim added");
+            else
+                Console.WriteLine("No claim was added");
 
             ReturnToMenu();
         }
@@ -97,7 +103,7 @@ namespace Claims_UI
                 Console.WriteLine($"Date of Claim: {claimToHandle.DateOfClaim.ToShortDateString()}");
                 Console.WriteLine($"Valid: {claimToHandle.IsValid}");
                 Console.Write("Do you want to deal with this claim now(y/n)?");
-                if (GetBool(Console.ReadKey().KeyChar))
+                if (GetBool())
                 {
                     if (_claimRepo.HandleClaim())
                         Console.WriteLine("\nClaim Handled");
@@ -118,33 +124,33 @@ namespace Claims_UI
             if (_claimRepo.SeeAllClaims().Count > 0)
             {
                 Console.Write("ClaimID  ");
-                int rClaimType = Console.CursorLeft;
+                int col_ClaimType = Console.CursorLeft;
                 Console.Write("ClaimType  ");
-                int rDateOfIncident = Console.CursorLeft;
+                int col_DateOfIncident = Console.CursorLeft;
                 Console.Write("DateOfIncident  ");
-                int rDateOfClaim = Console.CursorLeft;
+                int col_DateOfClaim = Console.CursorLeft;
                 Console.Write("DateOfClaim  ");
-                int rIsValid = Console.CursorLeft;
+                int col_IsValid = Console.CursorLeft;
                 Console.Write("isValid  ");
-                int rAmount = Console.CursorLeft;
+                int col_Amount = Console.CursorLeft;
                 Console.Write("Amount     ");
-                int rDescription = Console.CursorLeft;
+                int col_Description = Console.CursorLeft;
                 Console.Write("Description\n");
 
                 foreach (var claim in _claimRepo.SeeAllClaims())
                 {
                     Console.Write(claim.ID);
-                    Console.CursorLeft = rClaimType;
+                    Console.CursorLeft = col_ClaimType;
                     Console.Write(claim.Type);
-                    Console.CursorLeft = rDateOfIncident;
+                    Console.CursorLeft = col_DateOfIncident;
                     Console.Write(claim.DateOfIncident.ToShortDateString());
-                    Console.CursorLeft = rDateOfClaim;
+                    Console.CursorLeft = col_DateOfClaim;
                     Console.Write(claim.DateOfClaim.ToShortDateString());
-                    Console.CursorLeft = rIsValid;
+                    Console.CursorLeft = col_IsValid;
                     Console.Write(claim.IsValid);
-                    Console.CursorLeft = rAmount;
-                    Console.Write($"${claim.Amount}");
-                    Console.CursorLeft = rDescription;
+                    Console.CursorLeft = col_Amount;
+                    Console.Write($"{_currency}{claim.Amount}");
+                    Console.CursorLeft = col_Description;
                     Console.Write(claim.Description + "\n");
                 }
             }
@@ -154,11 +160,11 @@ namespace Claims_UI
             ReturnToMenu();
         }
 
-        private bool GetBool(char response)
+        private bool GetBool()
         {
             while(true)
             {
-                switch (response)
+                switch (Console.ReadKey().KeyChar)
                 {
                     case 'y': return true;
                     case 'n': return false;
@@ -166,14 +172,16 @@ namespace Claims_UI
             }
         }
 
-        private ClaimType GetClaimType(string type)
+        private ClaimType GetClaimType()
         {
-            switch(type.ToUpper())
+            while(true)
             {
-                case "CAR": return ClaimType.Car;
-                case "HOME": return ClaimType.Home;
-                case "THEFT": return ClaimType.Theft;
-                default: return (ClaimType)5;
+                switch (Console.ReadLine().ToUpper())
+                {
+                    case "CAR": return ClaimType.Car;
+                    case "HOME": return ClaimType.Home;
+                    case "THEFT": return ClaimType.Theft;
+                }
             }
         }
 

@@ -10,7 +10,7 @@ namespace Cafe_Console
     class ProgramUI
     {
        private readonly IMenuRepository _menuRepo;
-        
+        private const char _currency = '$';
        public ProgramUI(IMenuRepository repo)
         {
             _menuRepo = repo;
@@ -22,7 +22,8 @@ namespace Cafe_Console
        private void GetUserResponse()
        {
             Console.Clear();
-            Console.WriteLine("Please select from the following options:\n" +
+            Console.WriteLine("Welcome to the Komodo Cafe Menu App!\n" +
+                "Please select from the following options:\n" +
                 "1->Create a new item to menu\n" +
                 "2->Get a list of all menu items\n" +
                 "3->Remove an existing item in menu\n" +
@@ -65,7 +66,7 @@ namespace Cafe_Console
         {
             Console.Clear();
 
-            Console.Write("ID Number: ");
+            Console.Write("Meal Number: ");
             int id = int.Parse(Console.ReadLine());
 
             Console.Write("Name: ");
@@ -76,10 +77,12 @@ namespace Cafe_Console
 
             Console.Write("Ingredients(COMMA SEPARATED): ");
             List<string> ingredients = Console.ReadLine().Split(',').ToList();
-            foreach (var item in ingredients)
-                item.Trim();
+            for (int i = 0; i < ingredients.Count; i++)
+            {
+                ingredients[i] = ingredients[i].Trim();
+            }
 
-            Console.Write("Price($): ");
+            Console.Write($"Price({_currency}): ");
             decimal price = decimal.Parse(Console.ReadLine());
 
             MenuItem newItem = new MenuItem(id, name, description, ingredients, price);
@@ -94,10 +97,10 @@ namespace Cafe_Console
         }
        private void PrintItem(MenuItem item)
         {
-            Console.WriteLine($"{item.Id} {item.Name} ${item.Price}\n{item.Description}");
+            Console.WriteLine($"{item.Id} {item.Name} {_currency}{item.Price}\n{item.Description}");
             foreach (var ingredient in item.Ingredients)
             {
-                Console.WriteLine(ingredient.Trim());
+                Console.WriteLine(ingredient);
             }
         }
        private void PrintMenu()

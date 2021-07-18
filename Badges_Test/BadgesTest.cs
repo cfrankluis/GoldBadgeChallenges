@@ -8,9 +8,9 @@ namespace Badges_Test
     [TestClass]
     public class BadgesTest
     {
-        BadgesTestRepo _testRepo;
-        Badge _badgeOne;
-        Badge _badgeTwo;
+        private BadgesTestRepo _testRepo;
+        private Badge _badgeOne;
+        private Badge _badgeTwo;
 
         [TestInitialize]
         public void Arrange()
@@ -24,7 +24,7 @@ namespace Badges_Test
             _badgeTwo.Doors = new List<string>() { "A4", "A5", "A7" };
 
             _testRepo = new BadgesTestRepo();
-            _testRepo._badges.Add(1,_badgeOne);
+            _testRepo._badges.Add(_badgeOne.ID,_badgeOne);
         }
 
         [TestMethod]
