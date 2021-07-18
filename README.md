@@ -77,6 +77,9 @@ When creating a new badge, the user will be prompted to provide the following pr
 - Badge Name
 - A list of door names it can access
 
+When providing a list of door names, each door name must be separated by a comma as shown below:
+>i.e.  A1,A2,B1,B2,C3,C4,D7,E8
+
 Once the following properties have been provided, a badge with the provided properties will be stored in a dictionary with its ID serving as the key to access the data about the badge.
 
 ## Updating doors on an existing badge
