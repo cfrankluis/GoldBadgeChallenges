@@ -57,10 +57,10 @@ When taking care of a claim, the user will be shown the next claim asked whether
 ---
 The claims will be shown in the following format:
 ```
-ClaimID Type   DateOfAccident  DateOfClaim IsValid Amount    Description
-1	      Car	   4/25/18	       4/27/18	   true    $400.00   Car accident on 465.
-2	      Home   4/11/18	       4/12/18	   true    $4000.00  House fire in kitchen.
-3	      Theft  4/27/18	       6/01/18	   false   $4.00     Stolen pancakes.	
+ClaimID  Type    DateOfAccident  DateOfClaim   IsValid   Amount      Description
+1	       Car	   4/25/18	       4/27/18	     true      $400.00     Car accident on 465.
+2	       Home    4/11/18	       4/12/18	     true      $4000.00    House fire in kitchen.
+3	       Theft   4/27/18	       6/01/18	     false     $4.00       Stolen pancakes.	
 ```
 
 # Challenge 3: Badges
