@@ -61,7 +61,7 @@ namespace Claims_UI
             Console.Write("Enter the claim id: ");
             int id = int.Parse(Console.ReadLine());
 
-            Console.Write("Enter the claim type: ");
+            Console.Write("Enter the claim type(Car, Home, Theft): ");
             ClaimType claimType = GetClaimType();
 
             Console.Write("Enter a claim description: ");
