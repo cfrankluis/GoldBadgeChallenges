@@ -88,7 +88,8 @@ namespace Badges_Console
                 Console.WriteLine();
                 Console.WriteLine("What would you like to do?\n" +
                                   "1. Remove a door\n" +
-                                  "2. Add a door\n");
+                                  "2. Add a door\n" +
+                                  "3. Cancel");
 
                 char choice = Console.ReadKey().KeyChar;
                 Console.WriteLine();
@@ -113,6 +114,7 @@ namespace Badges_Console
                         else
                             Console.WriteLine("Door is not added");
                         break;
+                    case '3': break;
                     default:
                         Console.Clear();
                         UpdateDoorsInBadge();
@@ -159,6 +161,7 @@ namespace Badges_Console
                     }
                     Console.WriteLine();
                 }
+                Console.WriteLine();
             }
             else
             {
