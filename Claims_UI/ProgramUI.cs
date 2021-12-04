@@ -83,9 +83,9 @@ namespace Claims_UI
 
             bool succeeded = _claimRepo.AddClaim(claimToAdd);
             if (succeeded)
-                Console.WriteLine("Claim added");
+                Console.WriteLine("\nClaim added");
             else
-                Console.WriteLine("No claim was added");
+                Console.WriteLine("\nNo claim was added");
 
             ReturnToMenu();
         }
